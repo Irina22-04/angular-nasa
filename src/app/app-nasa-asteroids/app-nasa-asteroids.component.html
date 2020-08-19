@@ -1,0 +1,12 @@
+<div>asteroids</div>
+<div *ngFor="let date of asteroids" (click)="selectDate($event.target.textContent)"
+     [ngClass]="{selectedDate: checkDate(date.date)}">
+  {{ date.date }}
+  <div *ngIf="checkDate(date.date)">
+    <div *ngFor="let asteroid of date.asteroids">
+      <a [routerLink]="['/item', asteroid.id]">
+        {{asteroid.name}}
+      </a>
+    </div>
+  </div>
+</div>

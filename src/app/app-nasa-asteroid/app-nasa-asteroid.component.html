@@ -1,0 +1,11 @@
+<div>
+  asteroid {{id}}
+  <div><span class="asteroid-param">Name:</span> {{asteroid?.name}}</div>
+  <div><span class="asteroid-param">Designation:</span> {{asteroid?.designation}}</div>
+  <div><span class="asteroid-param">Absolute Magnitude:</span>
+    {{asteroid?.absolute_magnitude_h}}</div>
+  <div><span class="asteroid-param">Estimated diameter:</span><br/>
+    minimal: {{asteroid?.estimated_diameter.kilometers.estimated_diameter_min}},<br/>
+    maximum: {{asteroid?.estimated_diameter.kilometers.estimated_diameter_max}}
+  </div>
+</div>
