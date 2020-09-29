@@ -13,7 +13,7 @@ import {AppNasaComponent} from './app-nasa/app-nasa.component';
 import {AppRoutingModule} from './app-routing.module';
 import {AppNasaTableComponent} from './app-nasa-table/app-nasa-table.component';
 import {AppNasaAsteroidsComponent} from './app-nasa-asteroids/app-nasa-asteroids.component';
-import {HttpService} from './http.service';
+import {HttpService} from './http-service/http.service';
 
 @NgModule({
   declarations: [

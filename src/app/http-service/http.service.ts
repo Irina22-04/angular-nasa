@@ -3,8 +3,8 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 
-import {AsteroidModel} from './models/asteroid.model';
-import {AsteroidListModel} from './models/asteroid-list.model';
+import {AsteroidModel} from '../models/asteroid.model';
+import {AsteroidListModel} from '../models/asteroid-list.model';
 
 @Injectable()
 export class HttpService {

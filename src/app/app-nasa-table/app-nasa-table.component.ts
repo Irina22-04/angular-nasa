@@ -5,8 +5,6 @@ import {Router} from '@angular/router';
 import {differenceDatesValidator} from './DatesValidator.directive';
 import {getRequestDate} from '../helper';
 
-// import {getReverseDate} from './DatesValidator.directive';
-
 @Component({
   selector: 'app-nasa-table',
   templateUrl: './app-nasa-table.component.html',
@@ -33,10 +31,6 @@ export class AppNasaTableComponent implements OnInit {
   }
 
   submit(): void {
-    // const startDate = getReverseDate(this.datesForm.value.startDate);
-    // const endDate = getReverseDate(this.datesForm.value.endDate);
-    //
-    // this.router.navigate(['/asteroids'], { queryParams: { s: startDate, e: endDate}});
     const {startDate, endDate} = this.datesForm.value;
     const requestStartDate = getRequestDate(startDate);
     const requestEndDate = getRequestDate(endDate);

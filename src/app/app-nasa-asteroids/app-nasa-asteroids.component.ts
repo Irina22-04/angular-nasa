@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {HttpService} from '../http.service';
+import {HttpService} from '../http-service/http.service';
 import {ActivatedRoute} from '@angular/router';
 import {AsteroidListModel} from '../models/asteroid-list.model';
 

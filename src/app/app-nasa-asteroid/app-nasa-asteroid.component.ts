@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {HttpService} from '../http.service';
+import {HttpService} from '../http-service/http.service';
 
 import {AsteroidModel} from '../models/asteroid.model';
 

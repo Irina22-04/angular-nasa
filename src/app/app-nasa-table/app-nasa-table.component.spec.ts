@@ -1,35 +1,47 @@
-import { TestBed, async } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
-import { NasaTableComponent } from './app.component';
+import {
+  CUSTOM_ELEMENTS_SCHEMA,
+  Directive,
+  HostListener,
+  Input,
+} from '@angular/core';
+import {async, TestBed} from '@angular/core/testing';
+import {AppNasaTableComponent} from './app-nasa-table.component';
+import {FormBuilder, ReactiveFormsModule} from '@angular/forms';
+import {Router} from '@angular/router';
 
-describe('AppComponent', () => {
+@Directive({
+  selector: '[routerLink]'
+})
+class FakeRouterLink {
+  @Input()
+  routerLink = '';
+
+  constructor(
+    private router: Router,
+  ) { }
+
+  @HostListener('click')
+  onClick(): void {
+    this.router.navigateByUrl(this.routerLink);
+  }
+}
+
+describe('AppNasaTableComponent', () => {
+  const routerSpy = jasmine.createSpyObj('Router', ['navigateByUrl']);
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule
-      ],
+      imports: [ReactiveFormsModule],
       declarations: [
-        NasaTableComponent
+        AppNasaTableComponent,
+        FakeRouterLink,
       ],
+      providers: [FormBuilder, { provide: Router, useValue: routerSpy }]
     }).compileComponents();
   }));
 
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(NasaTableComponent);
-    const app = fixture.componentInstance;
+  it('should be created', async(() => { // внимание - здесь async это имя функции, а не ключевое слово JS
+    const fixture = TestBed.createComponent(AppNasaTableComponent);
+    const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
-  });
-
-  it(`should have as title 'angular-nasa'`, () => {
-    const fixture = TestBed.createComponent(NasaTableComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('angular-nasa');
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(NasaTableComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('angular-nasa app is running!');
-  });
+  }));
 });

@@ -10,7 +10,7 @@ const routes: Routes = [
   {path: '', component: AppNasaTableComponent},
   {path: 'item/:id', component: AppNasaAsteroidComponent},
   {path: 'asteroids', component: AppNasaAsteroidsComponent},
-  // {path: '**', redirectTo: '/' }
+  {path: '**', redirectTo: '/' }
 ];
 
 @NgModule({

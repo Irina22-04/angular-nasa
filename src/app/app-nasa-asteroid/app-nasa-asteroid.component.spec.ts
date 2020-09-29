@@ -1,35 +1,44 @@
-import { TestBed, async } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
-import { NasaTableComponent } from './app.component';
+import {async, TestBed} from '@angular/core/testing';
+import {AppNasaAsteroidComponent} from './app-nasa-asteroid.component';
+import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
+import {HttpService} from '../http-service/http.service';
+import {HttpClientModule} from '@angular/common/http';
+import {of} from 'rxjs';
+import {ActivatedRoute} from '@angular/router';
 
-describe('AppComponent', () => {
+
+describe('AppNasaAsteroidComponent', () => {
+  let httpMock: HttpTestingController;
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule
-      ],
+      imports: [HttpClientTestingModule],
       declarations: [
-        NasaTableComponent
+        AppNasaAsteroidComponent
       ],
+      providers: [HttpService,
+        HttpClientModule,
+        {provide: ActivatedRoute, useValue: {params: of({id: 5})}}],
     }).compileComponents();
+
+    httpMock = TestBed.inject(HttpTestingController);
   }));
 
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(NasaTableComponent);
-    const app = fixture.componentInstance;
+  it('should be created', async(() => {
+    const mockAsteroid = {
+      name: '21277 (1996 TO5)',
+      designation: '21277',
+      absolute_magnitude_h: '16.1',
+      estimated_diameter: {
+        estimated_diameter_min: 5,
+        estimated_diameter_max: 6,
+      },
+    };
+
+    const fixture = TestBed.createComponent(AppNasaAsteroidComponent);
+    const app = fixture.debugElement.componentInstance;
+    const request = httpMock.expectOne(`https://api.nasa.gov/neo/rest/v1/neo/5?api_key=aXftfudqCz4arjUmr5ZcEHHxeM5H90ITgTtrXE1W`);
+    request.flush(mockAsteroid);
     expect(app).toBeTruthy();
-  });
-
-  it(`should have as title 'angular-nasa'`, () => {
-    const fixture = TestBed.createComponent(NasaTableComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('angular-nasa');
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(NasaTableComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('angular-nasa app is running!');
-  });
+  }));
 });
